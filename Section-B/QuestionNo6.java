@@ -263,7 +263,6 @@ public class QuestionNo6{
                    }
                    
                    if(result){
-                        System.out.println("No possible solution33");
                       values[0] = 1;
                       return values;
                    }
