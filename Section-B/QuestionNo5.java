@@ -91,7 +91,7 @@ public class QuestionNo5{
         
         int[] adventurer_i_result = calculateSteps(adventurer_i, gold_i, gold_j, adventurer_j, "j");
         
-         if(adventurer_j_result[0] == 1){
+         if(adventurer_i_result[0] == 1){
              System.out.println("No possible solution");
             return;
          }
