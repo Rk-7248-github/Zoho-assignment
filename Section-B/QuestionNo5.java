@@ -200,16 +200,22 @@ public class QuestionNo5{
               
                    result = pitsCheck(a, resultIdlePoint, idleType );
                    
-                   if(result){
+      
+		      if(result){
                        result = pitsCheck(a+1, resultIdlePoint + firstMove, idleType );
-                       resultIdlePoint = resultIdlePoint + firstMove;
-                       a++;
-                   }
-                   if(result){
+                       
+                       if(result){
                        result = pitsCheck(a+1, resultIdlePoint + secondMove, idleType );
                        resultIdlePoint = resultIdlePoint + firstMove;
                        a++;
+                       }else{
+                           resultIdlePoint = resultIdlePoint + firstMove;
+                           a++;
+                       }
+
                    }
+		     
+		     
                    
                    if(result){
                       values[0] = 1;
