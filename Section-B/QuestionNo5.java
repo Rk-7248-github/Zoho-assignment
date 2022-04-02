@@ -162,6 +162,7 @@ public class QuestionNo5{
        
           if(Start < end){
             
+	//this for loop using to move the adventurer either RIGHT or DOWN
              for(int a = Start+1; a <= end; a++){
                  
 
@@ -200,12 +201,10 @@ public class QuestionNo5{
          
         }else if(Start > end){
              
+	    //this for loop using to move the adventurer either LEFT or UP
              for(int a = Start-1; a >= end; a--){
                  
 
-
-
-                  
                          boolean result = false;
                  
               
