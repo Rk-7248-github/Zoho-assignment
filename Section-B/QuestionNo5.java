@@ -79,9 +79,15 @@ public class QuestionNo5{
         if(adventurer_j_result[0] == 1){
              System.out.println("No possible solution");
             return;
+        } else if(adventurer_j_result[0] == 2){
+            
+            
+             System.out.println("Minimum number of steps: "+ (totleSteps+adventurer_j_result[2] ));
+            return;
         }
         totleSteps = adventurer_j_result[2];
         adventurer_i = adventurer_j_result[1];
+        adventurer_j = adventurer_j_result[3];
         
         int[] adventurer_i_result = calculateSteps(adventurer_i, gold_i, gold_j, adventurer_j, "j");
         
@@ -90,7 +96,7 @@ public class QuestionNo5{
             return;
          }
 
-        totleSteps = totleSteps + adventurer_i_result[2] - 1;
+        totleSteps = totleSteps + adventurer_i_result[2];
         
         System.out.println("Minimum number of steps: "+ totleSteps);
             
@@ -130,12 +136,12 @@ public class QuestionNo5{
 
 
    //this method is used to find out the total number of steps to reach the gold.
-  private  static int[] calculateSteps(int Start, int end, int idleGold, int idlePoint, String idleType){
+    static int[] calculateSteps(int Start, int end, int idleGold, int idlePoint, String idleType){
        
        int count = 0;
        int firstMove = 0;
        int secondMove = 0;
-       int[] values = new int[3];
+       int[] values = new int[4];
        
        if(idlePoint < idleGold){
            firstMove = 1;
@@ -152,15 +158,15 @@ public class QuestionNo5{
        }
        
        int resultIdlePoint = idlePoint;
+       int currentpoint = Start;       
        
           if(Start < end){
             
-             //this for loop using to move the adventurer either RIGHT or DOWN
              for(int a = Start+1; a <= end; a++){
                  
+
                  boolean result = false;
-                 
-              
+
                    result = pitsCheck(a, resultIdlePoint, idleType );
                    
                    if(result){
@@ -168,7 +174,7 @@ public class QuestionNo5{
                        
                        if(result){
                        result = pitsCheck(a-1, resultIdlePoint + secondMove, idleType );
-                       resultIdlePoint = resultIdlePoint + firstMove;
+                       resultIdlePoint = resultIdlePoint + secondMove;
                        a--;
                        }else{
                            resultIdlePoint = resultIdlePoint + firstMove;
@@ -177,12 +183,15 @@ public class QuestionNo5{
                        
                        
                    }
+
                    
                    if(result){
                        values[0] = 1;
                       return values;
                    }
             
+ 		
+               currentpoint = a;
 
                 count++;
 
@@ -191,37 +200,40 @@ public class QuestionNo5{
          
         }else if(Start > end){
              
-            //this for loop using to move the adventurer either LEFT or UP
              for(int a = Start-1; a >= end; a--){
                  
+
+
+
                   
                          boolean result = false;
                  
               
                    result = pitsCheck(a, resultIdlePoint, idleType );
                    
-      
-		      if(result){
+                   if(result){
                        result = pitsCheck(a+1, resultIdlePoint + firstMove, idleType );
                        
                        if(result){
                        result = pitsCheck(a+1, resultIdlePoint + secondMove, idleType );
-                       resultIdlePoint = resultIdlePoint + firstMove;
+                       resultIdlePoint = resultIdlePoint + secondMove;
                        a++;
                        }else{
                            resultIdlePoint = resultIdlePoint + firstMove;
                            a++;
                        }
-
+                       
+                       
                    }
-		     
-		     
                    
                    if(result){
                       values[0] = 1;
                       return values;
                    }
             
+		
+
+                  currentpoint = a;
             
                 count++;
 
@@ -233,13 +245,14 @@ public class QuestionNo5{
         values[0] = 0;
         values[1] = resultIdlePoint;
         values[2] = count;
+	  values[3] = currentpoint ;
         return values;
        
    }
    
    
    // this method is used to avoid taking invalied inputs
-  private static int[] repeaterPosition(int rows, int columns, String info){
+   static int[] repeaterPosition(int rows, int columns, String info){
        Scanner sc= new Scanner(System.in); 
        System.out.print(info);
        int i = sc.nextInt();
@@ -256,7 +269,7 @@ public class QuestionNo5{
    }
 
    // this method is used to avoid taking invalied inputs
-  private  static int[] repeaterDimensions(String info){
+    static int[] repeaterDimensions(String info){
        Scanner sc= new Scanner(System.in); 
        System.out.print(info);
        int i = sc.nextInt();
